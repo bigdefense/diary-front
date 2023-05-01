@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import SideBarPresent from "./SideBarPresent";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import SideBarPresent from './SideBarPresent';
 
 function SideBarContainer() {
   const stickerList = useSelector(
-    (state) => state.stickerReducer.stickersArray.Table
+    (state) => state.stickerReducer.stickersArray.Table,
   );
   const [modalVisible, setModalVisible] = useState(false);
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
-  //visibleHandler로 통합할까?
+  // visibleHandler로 통합할까?
   const modalHandler = () => {
     setModalVisible(!modalVisible);
   };

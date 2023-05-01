@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useGetDaily from '@/pages/Utils/useGetDaily';
@@ -23,11 +24,10 @@ function DailyDisplayContainer() {
   const [content, setContent] = useState('');
 
   const getDaily = useGetDaily(currentDate);
-
   useEffect(() => {
     if (currentDate) dispatch(setDaily(getDaily));
     setContent(initContent);
-  }, [currentDate, dispatch]);
+  }, [dispatch, getDaily]);
 
   useEffect(() => {
     dispatch(setTitle({ titleText: content, locdate: currentDate }));
@@ -39,7 +39,7 @@ function DailyDisplayContainer() {
 
   return (
     <DailyDisplayPresenter
-      Daily={Daily}
+      Daily={Daily || {}}
       content={content}
       handleInput={handleInput}
     />

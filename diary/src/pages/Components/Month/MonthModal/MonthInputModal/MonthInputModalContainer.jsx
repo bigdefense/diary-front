@@ -1,13 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+/* eslint-disable react/forbid-prop-types */
+import React, {
+  useEffect, useRef, useState,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setTodo } from '@/Redux/action';
+import { setTodo } from '../../../../../Redux/action';
 import MonthInputModalPresenter from './MonthInputModalPresenter';
 /**
  *
- * @param {dayInfo} obj
- * @param {inputModalVisible} boolean
- * @param {handleInputModalClose} func
+ * @param {dayInfo} obj 모달이 선택된 날짜 객체 정보
+ * @param {inputModalVisible} boolean input modal의 on/off 상태
+ * @param {handleInputModalClose} func 모달창을 끄게함
  * @returns
  */
 
@@ -19,8 +22,7 @@ function MonthInputModalContainer({
 }) {
   const dispatch = useDispatch();
   const [inputText, setInputText] = useState('');
-  const focusRef = useRef();
-
+  const focusRef = useRef(null);
   const handleChange = (e) => {
     setInputText(e.target.value);
   };
@@ -39,7 +41,6 @@ function MonthInputModalContainer({
   const onChildDbclick = (e) => {
     e.stopPropagation();
   };
-
   return (
     <MonthInputModalPresenter
       dayInfo={dayInfo}
@@ -56,9 +57,21 @@ function MonthInputModalContainer({
 }
 
 MonthInputModalContainer.propTypes = {
-  dayInfo: PropTypes.object,
-  inputModalVisible: PropTypes.bool,
-  handleInputModalClose: PropTypes.func,
-  inputModalRef: PropTypes.object,
+  dayInfo: PropTypes.shape({
+    date: PropTypes.number.isRequired,
+    dateName: PropTypes.string.isRequired,
+    day: PropTypes.string.isRequired,
+    isHoliday: PropTypes.bool.isRequired,
+    isInMonth: PropTypes.bool.isRequired,
+    locdate: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
+    todos: PropTypes.arrayOf(PropTypes.shape({
+      date: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      todoContent: PropTypes.string.isRequired,
+    })).isRequired,
+  }).isRequired,
+  inputModalVisible: PropTypes.bool.isRequired,
+  handleInputModalClose: PropTypes.func.isRequired,
+  inputModalRef: PropTypes.shape({ current: PropTypes.object }).isRequired,
 };
 export default MonthInputModalContainer;

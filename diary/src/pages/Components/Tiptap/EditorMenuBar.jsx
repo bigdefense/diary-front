@@ -3,6 +3,7 @@ import {
   BiBold, BiItalic, BiStrikethrough, BiText, BiUndo, BiRedo,
 } from 'react-icons/bi';
 import PropTypes from 'prop-types';
+import { Editor } from '@tiptap/react';
 import EditorMenuBarButton from './EditorMenuBarButton';
 
 const EditorMenuBar = ({ editor }) => {
@@ -51,38 +52,52 @@ const EditorMenuBar = ({ editor }) => {
       <input
         type="color"
         onInput={(event) => editor.chain().focus().setColor(event.target.value).run()}
-        value={editor.getAttributes('textStyle').color}
+        // value={editor.getAttributes('textStyle').color}
+        value="#000000"
         className="outline-none focus:outline-none border-r border-gray-200 w-14 h-10 hover:text-indigo-500 active:bg-gray-50"
       />
-      <EditorMenuBarButton
+      <button
+        type="button"
         onClick={() => editor.chain().focus().setColor('#958DF1').run()}
-        className={editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : ''}
-        content={<BiText size="28" className="w-14 text-[#958DF1]" />}
-      />
-      <EditorMenuBarButton
+        className={`border-r border-gray-200 ${editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : ''}`}
+      >
+        <BiText size="28" className="w-14 text-[#958DF1]" />
+      </button>
+      <button
+        type="button"
         onClick={() => editor.chain().focus().setColor('#F98181').run()}
-        className={editor.isActive('textStyle', { color: '#F98181' }) ? 'is-active' : ''}
-        content={<BiText size="28" className="w-14 text-[#F98181]" />}
-      />
-      <EditorMenuBarButton
+        className={`border-r border-gray-200 ${editor.isActive('textStyle', { color: '#F98181' }) ? 'is-active' : ''}`}
+      >
+        <BiText size="28" className="w-14 text-[#F98181]" />
+      </button>
+      <button
+        type="button"
         onClick={() => editor.chain().focus().setColor('#FBBC88').run()}
-        className={editor.isActive('textStyle', { color: '#FBBC88' }) ? 'is-active' : ''}
-        content={<BiText size="28" className="w-14 text-[#FBBC88]" />}
-      />
-      <EditorMenuBarButton
+        className={`border-r border-gray-200 ${editor.isActive('textStyle', { color: '#FBBC88' }) ? 'is-active' : ''}`}
+      >
+        <BiText size="28" className="w-14 text-[#FBBC88]" />
+      </button>
+      <button
+        type="button"
         onClick={() => editor.chain().focus().setColor('#B9F18D').run()}
-        className={editor.isActive('textStyle', { color: '#B9F18D' }) ? 'is-active' : ''}
-        content={<BiText size="28" className="w-14 text-[#B9F18D]" />}
-      />
-      <EditorMenuBarButton
+        className={`border-r border-gray-200 ${editor.isActive('textStyle', { color: '#B9F18D' }) ? 'is-active' : ''}`}
+      >
+        <BiText size="28" className="w-14 text-[#B9F18D]" />
+      </button>
+      <button
+        type="button"
         onClick={() => editor.chain().focus().setColor('#70CFF8').run()}
-        className={editor.isActive('textStyle', { color: '#70CFF8' }) ? 'is-active' : ''}
-        content={<BiText size="28" className="w-14 text-[#70CFF8]" />}
-      />
-      <EditorMenuBarButton
+        className={`border-r border-gray-200 ${editor.isActive('textStyle', { color: '#70CFF8' }) ? 'is-active' : ''}`}
+      >
+        <BiText size="28" className="w-14 text-[#70CFF8]" />
+      </button>
+      <button
+        type="button"
         onClick={() => editor.chain().focus().unsetColor().run()}
-        content={<BiText size="28" className="w-14 text-black" />}
-      />
+        className="border-r border-gray-200"
+      >
+        <BiText size="28" className="w-14 text-black" />
+      </button>
       <EditorMenuBarButton
         onClick={() => editor.chain().focus().undo().run()}
         disabled={
@@ -105,11 +120,13 @@ const EditorMenuBar = ({ editor }) => {
         }
         content={<BiRedo size="28" className="w-14" />}
       />
-
     </>
   );
 };
 EditorMenuBar.propTypes = {
-  editor: PropTypes.object,
+  editor: PropTypes.instanceOf(Editor),
+};
+EditorMenuBar.defaultProps = {
+  editor: {},
 };
 export default EditorMenuBar;

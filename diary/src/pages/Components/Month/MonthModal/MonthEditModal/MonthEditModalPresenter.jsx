@@ -1,10 +1,12 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import {
   BiEdit, BiTrash, BiTransfer, BiX,
 } from 'react-icons/bi';
 import PropTypes from 'prop-types';
-import { INPUT_PLACEHOLDER } from '@/Constants/monthlyConstants';
+import { INPUT_PLACEHOLDER } from '../../../../../Constants/monthlyConstants';
 
+// input Modal의 수정창 === editmodal
 function MonthEditModalPresenter({
   todo,
   dayInfo,
@@ -13,7 +15,6 @@ function MonthEditModalPresenter({
   editModalRef,
   handleEditKeyPress,
   onDelete,
-  onChildDbclick,
   setIsEdited,
   isEdited,
   editText,
@@ -22,7 +23,7 @@ function MonthEditModalPresenter({
 }) {
   return editModalVisible && dayInfo.locdate ? (
     <div
-      onDoubleClick={onChildDbclick}
+      onDoubleClick={(e) => e.stopPropagation()}
       ref={editModalRef}
       className="z-0 absolute inset-x-auto w-96 h-fit bg-white text-right select-none rounded drop-shadow-2xl"
     >
@@ -71,18 +72,34 @@ function MonthEditModalPresenter({
 }
 
 MonthEditModalPresenter.propTypes = {
-  todo: PropTypes.object,
-  dayInfo: PropTypes.object,
-  editModalVisible: PropTypes.bool,
-  handleEditModalClose: PropTypes.func,
-  editModalRef: PropTypes.object,
-  handleEditKeyPress: PropTypes.func,
-  onDelete: PropTypes.func,
-  onChildDbclick: PropTypes.func,
-  setIsEdited: PropTypes.func,
-  isEdited: PropTypes.bool,
-  editText: PropTypes.string,
-  focusRef: PropTypes.object,
-  handleEditText: PropTypes.func,
+  dayInfo: PropTypes.shape({
+    date: PropTypes.number.isRequired,
+    dateName: PropTypes.string.isRequired,
+    day: PropTypes.string.isRequired,
+    isHoliday: PropTypes.bool.isRequired,
+    isInMonth: PropTypes.bool.isRequired,
+    locdate: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
+    todos: PropTypes.arrayOf(PropTypes.shape({
+      date: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      todoContent: PropTypes.string.isRequired,
+    })).isRequired,
+  }).isRequired,
+  todo: PropTypes.shape({
+    date: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    todoContent: PropTypes.string.isRequired,
+  }).isRequired,
+  editModalVisible: PropTypes.bool.isRequired,
+  handleEditModalClose: PropTypes.func.isRequired,
+  editModalRef: PropTypes.shape({ current: PropTypes.object }).isRequired,
+  handleEditKeyPress: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  setIsEdited: PropTypes.func.isRequired,
+  isEdited: PropTypes.bool.isRequired,
+  editText: PropTypes.string.isRequired,
+  focusRef: PropTypes.shape({ current: PropTypes.object }).isRequired,
+  handleEditText: PropTypes.func.isRequired,
+
 };
 export default MonthEditModalPresenter;

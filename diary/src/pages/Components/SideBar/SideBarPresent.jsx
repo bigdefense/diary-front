@@ -1,8 +1,8 @@
-import React from "react";
-import { v4 } from "uuid";
-import StickerMakeModal from "../StickerMakeModal/StickerMakeModal";
-import SideBarColumn from "./SideBarColumn";
-import { BiChevronLeft, BiChevronRight, BiImageAdd } from "react-icons/bi";
+import React from 'react';
+import { v4 } from 'uuid';
+import { BiChevronLeft, BiChevronRight, BiImageAdd } from 'react-icons/bi';
+import StickerMakeModal from '../StickerMakeModal/StickerMakeModal';
+import SideBarColumn from './SideBarColumn';
 
 /**
  *

@@ -1,5 +1,4 @@
-import { DAY_OF_WEEK } from "@/Constants/monthlyConstants";
-import React from "react";
+import { DAY_OF_WEEK } from '../../Constants/monthlyConstants';
 
 /**
  *
@@ -10,12 +9,9 @@ import React from "react";
 const useGetDaily = (date) => {
   const dateInDaily = new Date(date);
 
-  // const dailyContent = {locdate:date, day:WEEKDAY[dateInDaily.getDay()], titleText:"", editorContent:"" }
-  const dailyContent = {};
-  dailyContent.locdate = date;
-  dailyContent.day = DAY_OF_WEEK[dateInDaily.getDay()];
-  dailyContent.titleText = "";
-  dailyContent.editorContent = "";
+  const dailyContent = {
+    locdate: date, day: DAY_OF_WEEK[dateInDaily.getDay()], titleText: '', editorContent: '',
+  };
   return dailyContent;
 };
 

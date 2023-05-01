@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 /**
  *
  * @param {onClick} func
- * @param {disabled} boolean
- * @param {content} str
+ * @param {disabled} bool
+ * @param {content} str icon 컴포넌트
  * @returns
  */
 
@@ -22,9 +22,14 @@ const EditorMenuBarButton = ({
   </button>
 );
 EditorMenuBarButton.propTypes = {
-  onClick: PropTypes.func,
-  disabled: PropTypes.boolean,
+  onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   className: PropTypes.string,
-  content: PropTypes.object,
+  content: PropTypes.element.isRequired,
+};
+
+EditorMenuBarButton.defaultProps = {
+  disabled: true,
+  className: '',
 };
 export default EditorMenuBarButton;

@@ -1,6 +1,6 @@
-import React from "react";
-import { v4 } from "uuid";
-import { DAYS_WEEKLY } from "../../Constants/weeklyConstant";
+import { v4 } from 'uuid';
+import { PropTypes } from 'prop-types';
+import { DAYS_WEEKLY } from '../../Constants/weeklyConstant';
 
 /**
  * @param {dateInWeekly} str 선택된 날짜,기본 날짜 ex."2023-04-04"
@@ -12,13 +12,16 @@ import { DAYS_WEEKLY } from "../../Constants/weeklyConstant";
  */
 
 export const getMonday = (dateInWeekly, plusDay) => {
-  console.log("week", dateInWeekly.getDate());
   const calcMonday = dateInWeekly.getDate() - dateInWeekly.getDay();
   const nextDate = (calc) => {
     const copyDate = new Date(dateInWeekly);
     return new Date(copyDate.setDate(calc));
   };
   return nextDate(calcMonday + plusDay);
+};
+getMonday.propTypes = {
+  dateInWeekly: PropTypes.string.isRequired,
+  plusDay: PropTypes.number.isRequired,
 };
 
 export const getlocWeek = (dateInWeekly) => {
@@ -27,12 +30,14 @@ export const getlocWeek = (dateInWeekly) => {
   const year = mondayDate.getFullYear();
   const month = mondayDate.getMonth() + 1;
   const weeks = parseInt(mondayDate.getDate() / 7, 10);
-  return `${year}-${month.toString().padStart(2, "0")}-W${weeks + 1}`;
+  return `${year}-${month.toString().padStart(2, '0')}-W${weeks + 1}`;
+};
+getlocWeek.propTypes = {
+  dateInWeekly: PropTypes.oneOf([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
 };
 
 const useGetWeekly = (dateInWeekly) => {
   const dateConv = new Date(dateInWeekly);
-  console.log(dateConv);
   const representWeekly = getlocWeek(dateConv);
 
   let weeklyList = [];
@@ -40,12 +45,12 @@ const useGetWeekly = (dateInWeekly) => {
   for (const days of DAYS_WEEKLY) {
     const weekObj = {
       day: days,
-      locdate: "",
-      textContent: "",
+      locdate: '',
+      textContent: '',
       id: v4(),
     };
-    if (days === "Weekly") weekObj.locdate = representWeekly;
-    else if (days !== "Weekly") {
+    if (days === 'Weekly') weekObj.locdate = representWeekly;
+    else if (days !== 'Weekly') {
       weekObj.locdate = getMonday(dateConv, plusDay)
         .toISOString()
         .substring(0, 10);
@@ -55,5 +60,7 @@ const useGetWeekly = (dateInWeekly) => {
   }
   return weeklyList;
 };
-
+useGetWeekly.propTypes = {
+  dateInWeekly: PropTypes.string.isRequired,
+};
 export default useGetWeekly;

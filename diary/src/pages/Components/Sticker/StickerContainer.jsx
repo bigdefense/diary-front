@@ -1,16 +1,16 @@
-import React, { useEffect, useRef } from "react";
-import useDraggable from "@/pages/hooks/useDraggable";
-import useResizable from "@/pages/hooks/useResizable";
-import { useDispatch } from "react-redux";
-import { removeSticker, resetSelect, setSelect } from "@/Redux/action";
+import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import useDraggable from '@/pages/hooks/useDraggable';
+import useResizable from '@/pages/hooks/useResizable';
+import { removeSticker, resetSelect, setSelect } from '@/Redux/action';
 import {
   CURRENT_ROUTER_PATH,
   SELECT_IN_STICKER_DIV,
   STICKER_IMG_SIZE_OBJECT,
   STICKER_POSITION_TRANSLATOR,
   STICKER_SELECTOR_ID,
-} from "@/Constants/constants";
-import StickerPresent from "./StickerPresent";
+} from '@/Constants/constants';
+import StickerPresent from './StickerPresent';
 
 /*
 현재 에러 사항
@@ -28,7 +28,9 @@ import StickerPresent from "./StickerPresent";
  * @param {height} string
  * @param {selected} boolean
  */
-function StickerContainer({ imgURL, id, position, width, height, selected }) {
+function StickerContainer({
+  imgURL, id, position, width, height, selected,
+}) {
   useDraggable(position);
   // resize를 할때, 왼쪽 축을 잡고 늘리면 오른쪽으로 늘어나는 문제가 있음.
   useResizable();
@@ -42,7 +44,7 @@ function StickerContainer({ imgURL, id, position, width, height, selected }) {
   useEffect(() => {
     const stickerPosition = document.querySelector(STICKER_SELECTOR_ID(id));
     stickerPosition.style.transform = STICKER_POSITION_TRANSLATOR(position);
-    const stickerImgSize = stickerPosition.querySelector(SELECT_IN_STICKER_DIV); //변수명 맘에 안듦.
+    const stickerImgSize = stickerPosition.querySelector(SELECT_IN_STICKER_DIV); // 변수명 맘에 안듦.
     Object.assign(stickerImgSize.style, STICKER_IMG_SIZE_OBJECT(width, height));
   }, []);
 
@@ -60,7 +62,7 @@ function StickerContainer({ imgURL, id, position, width, height, selected }) {
   const removeStickerHandler = (e) => {
     const selectedStickerId = e.target.parentNode.parentNode.id;
     dispatch(
-      removeSticker({ id: selectedStickerId, origin: routerRef.current })
+      removeSticker({ id: selectedStickerId, origin: routerRef.current }),
     );
   };
 

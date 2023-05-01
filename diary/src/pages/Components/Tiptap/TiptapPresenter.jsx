@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditorContent } from '@tiptap/react';
+import { Editor, EditorContent } from '@tiptap/react';
 import PropTypes from 'prop-types';
 import EditorMenuBar from './EditorMenuBar';
 
@@ -31,6 +31,9 @@ const TiptapPresenter = ({ editor }) => (
 );
 
 TiptapPresenter.propTypes = {
-  editor: PropTypes.object,
+  editor: PropTypes.instanceOf(Editor),
+};
+TiptapPresenter.defaultProps = {
+  editor: {},
 };
 export default TiptapPresenter;

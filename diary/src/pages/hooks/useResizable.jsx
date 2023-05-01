@@ -1,11 +1,11 @@
+import interact from 'interactjs';
+import { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { setResize } from '@/Redux/action';
 import {
   CURRENT_ROUTER_PATH,
   STICKER_IMG_SIZE_OBJECT,
-} from "@/Constants/constants";
-import { setResize } from "@/Redux/action";
-import interact from "interactjs";
-import { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+} from '@/Constants/constants';
 
 const useResizable = () => {
   const stickerSize = useRef(null);
@@ -24,14 +24,14 @@ const useResizable = () => {
           id,
           size: stickerSize.current,
           position,
-        })
+        }),
       );
       timer.current = null;
     }, time);
   };
 
   useEffect(() => {
-    interact(".resizable").resizable({
+    interact('.resizable').resizable({
       edges: {
         top: true,
         left: true,
@@ -52,7 +52,7 @@ const useResizable = () => {
             height: event.rect.height,
           };
 
-          //여기 부분에서 debounce가 아닌 mouseUp될때 dispatch를 실행할 수 있도록 변경해야하 할 것 같음. draggable에서도 동일.
+          // 여기 부분에서 debounce가 아닌 mouseUp될때 dispatch를 실행할 수 있도록 변경해야하 할 것 같음. draggable에서도 동일.
           debounce(parentElem.id, 500, stickerTimer, { x, y });
 
           Object.assign(
@@ -61,8 +61,8 @@ const useResizable = () => {
               stickerSize.current.width,
               stickerSize.current.height,
               x,
-              y
-            )
+              y,
+            ),
           );
           /* move event가 발생하는 동안 event.target.dataset을 실시간 변경해줌. */
           Object.assign(event.target.dataset, { x, y });

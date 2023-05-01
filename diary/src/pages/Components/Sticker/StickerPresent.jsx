@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { BiX } from "react-icons/bi";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { BiX } from 'react-icons/bi';
 
 const StickerPresent = ({
   id,
@@ -19,7 +19,7 @@ const StickerPresent = ({
     onBlur={selected ? (e) => blurHandler(e) : null}
   >
     <div
-      className={`${selected ? "resizable ring" : null}`}
+      className={`${selected ? 'resizable ring' : null}`}
       onDoubleClick={(e) => focusHandler(e)}
     >
       {selected ? (

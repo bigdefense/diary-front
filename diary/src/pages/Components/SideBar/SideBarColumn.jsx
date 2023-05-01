@@ -1,7 +1,7 @@
-import React from "react";
-import { v4 } from "uuid";
-import PropTypes from "prop-types";
-import StickerButtonContainer from "../StickerButton/StickerButtonContainer";
+import React from 'react';
+import { v4 } from 'uuid';
+import PropTypes from 'prop-types';
+import StickerButtonContainer from '../StickerButton/StickerButtonContainer';
 
 function SideBarColumn({ stickerCol }) {
   return (

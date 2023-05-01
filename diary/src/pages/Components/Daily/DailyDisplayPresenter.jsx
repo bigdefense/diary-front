@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { v4 } from "uuid";
-import { TITLE } from "@/Constants/dailyConstant";
-import TiptapContainer from "@/pages/Components/Tiptap/TiptapContainer";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { v4 } from 'uuid';
+import { TITLE } from '../../../Constants/dailyConstant';
+import TiptapContainer from '../Tiptap/TiptapContainer';
 
 function DailyDisplayPresenter({ Daily, content, handleInput }) {
   const roundLine = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
@@ -41,8 +41,21 @@ function DailyDisplayPresenter({ Daily, content, handleInput }) {
   );
 }
 DailyDisplayPresenter.propTypes = {
-  Daily: PropTypes.object,
-  content: PropTypes.string,
-  handleInput: PropTypes.func,
+  Daily: PropTypes.shape({
+    day: PropTypes.string,
+    editorContent: PropTypes.string,
+    locdate: PropTypes.string,
+    titleText: PropTypes.string,
+  }),
+  content: PropTypes.string.isRequired,
+  handleInput: PropTypes.func.isRequired,
+};
+DailyDisplayPresenter.defaultProps = {
+  Daily: PropTypes.shape({
+    day: '',
+    editorContent: '',
+    locdate: '',
+    titleText: '',
+  }),
 };
 export default DailyDisplayPresenter;

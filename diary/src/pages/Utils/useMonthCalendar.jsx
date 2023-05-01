@@ -1,7 +1,6 @@
-import React from "react";
-import { DAY_OF_WEEK, MONTH_DAYS } from "../../Constants/monthlyConstants";
-import Holiday from "../Json/holidays_kr.json";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import { DAY_OF_WEEK, MONTH_DAYS } from '../../Constants/monthlyConstants';
+import Holiday from '../Json/holidays_kr.json';
 
 /**
  * @param {idxMonth} number, (ex. 03 -> 2)
@@ -13,48 +12,46 @@ import PropTypes from "prop-types";
  */
 
 const useMonthCalendar = (year, month) => {
-  const idxMonth = month * 1 - 1;
-  const monthStartDay = new Date(year, idxMonth, 1).getDay();
+  const monthIdx = month * 1 - 1;
+  const monthStartDay = new Date(year, monthIdx, 1).getDay();
   const MAX_WEEKS = 6;
 
   const MonthTable = Array.from(Array(MAX_WEEKS), (_, fewWeeks) => {
-    let week = [];
+    let weekArr = [];
     let startday = 1;
-    for (let dayOfWeek of DAY_OF_WEEK) {
-      let monthCalendar = {
-        locdate: "",
-        date: "",
+    for (const dayOfWeek of DAY_OF_WEEK) {
+      const monthCalendar = {
+        locdate: '',
+        date: '',
         isInMonth: false,
-        day: "",
-        dateName: "",
+        day: '',
+        dateName: '',
         isHoliday: false,
         todos: [],
       };
-      let date = fewWeeks * 7 - monthStartDay + startday++;
+      const date = fewWeeks * 7 - monthStartDay + startday;
+      startday += 1;
 
-      if (date > MONTH_DAYS[idxMonth]) {
+      if (date > MONTH_DAYS[monthIdx]) {
         monthCalendar.locdate = false;
-        monthCalendar.date = date - MONTH_DAYS[idxMonth];
-        if (fewWeeks === 5 && dayOfWeek === "Sun") break;
+        monthCalendar.date = date - MONTH_DAYS[monthIdx];
+        if (fewWeeks === 5 && dayOfWeek === 'Sun') break;
       } else if (date < 1) {
         monthCalendar.locdate = false;
-        monthCalendar.date = date + (MONTH_DAYS[idxMonth - 1] || 31);
-      } else if (date >= 1 && date <= MONTH_DAYS[idxMonth]) {
-        monthCalendar.locdate =
-          `${year}-${month}-` + date.toString().padStart(2, "0");
+        monthCalendar.date = date + (MONTH_DAYS[monthIdx - 1] || 31);
+      } else if (date >= 1 && date <= MONTH_DAYS[monthIdx]) {
+        monthCalendar.locdate = `${year}-${month}-${date.toString().padStart(2, '0')}`;
         monthCalendar.date = date;
         monthCalendar.isInMonth = true;
       }
       monthCalendar.day = dayOfWeek;
-      monthCalendar.dateName =
-        Holiday[year] && Holiday[year][monthCalendar.locdate]
-          ? Holiday[year][monthCalendar.locdate]
-          : "";
-      monthCalendar.isHoliday =
-        dayOfWeek === "Sun" || monthCalendar.dateName ? true : false;
-      week = [...week, monthCalendar];
+      monthCalendar.dateName = Holiday[year] && Holiday[year][monthCalendar.locdate]
+        ? Holiday[year][monthCalendar.locdate]
+        : '';
+      monthCalendar.isHoliday = !!(dayOfWeek === 'Sun' || monthCalendar.dateName);
+      weekArr = [...weekArr, monthCalendar];
     }
-    return week;
+    return weekArr;
   });
   return MonthTable;
 };

@@ -1,12 +1,12 @@
-import React from "react";
-import Image from "next/image";
-import bookDrop from "public/Lottie/bookdrop.json";
-import Logo from "public/Logo/logo.svg";
-import Pen from "public/Logo/pen.svg";
-import Lottie from "lottie-react";
-import GleLoginContainer from "./Components/GleLoginContainer";
-import App from "next/app";
-import { landingPageContent } from "@/Constants/constants";
+import React from 'react';
+import Image from 'next/image';
+import bookDrop from 'public/Lottie/bookdrop.json';
+import Logo from 'public/Logo/logo.svg';
+import Pen from 'public/Logo/pen.svg';
+import Lottie from 'lottie-react';
+import App from 'next/app';
+import GleLoginContainer from './Components/GleLoginContainer';
+import { landingPageContent } from '@/Constants/constants';
 
 function Landing() {
   return (

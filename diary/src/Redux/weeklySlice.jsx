@@ -1,7 +1,14 @@
-import { getMonday } from "@/pages/Utils/useGetWeekly";
-import { createSlice, current } from "@reduxjs/toolkit";
+/* eslint-disable no-param-reassign */
+import { createSlice } from '@reduxjs/toolkit';
+import { getMonday } from '../pages/Utils/useGetWeekly';
 
-const calNAME = "weeklyPlanner";
+/**
+ * {setWeekly} Weekly의 모든 것
+ * {setlocWeek} 현재 날짜
+ * {setlectedDateInWeek} 그 주의 월요일
+ * {setTextContent} 텍스트
+ */
+const calNAME = 'weeklyPlanner';
 export const weeklySlice = createSlice({
   name: calNAME,
   initialState: {
@@ -11,7 +18,7 @@ export const weeklySlice = createSlice({
   reducers: {
     setWeekly: (
       { weeklyContents },
-      { payload: { locWeek, currentWeeklyPage } }
+      { payload: { locWeek, currentWeeklyPage } },
     ) => {
       if (!weeklyContents[`W-${locWeek}`]) {
         weeklyContents[`W-${locWeek}`] = currentWeeklyPage;
@@ -25,10 +32,24 @@ export const weeklySlice = createSlice({
     },
     setTextContent: (
       { weeklyContents },
-      { payload: { idx, content, locThisWeek } }
+      { payload: { idx, content, locThisWeek } },
     ) => {
       weeklyContents[`W-${locThisWeek}`][idx].textContent = content;
     },
+    setMoveToWeek: (state, { payload: nextWeek }) => {
+      const currDate = state.selectedDateInWeek;
+      const dateConv = new Date(currDate);
+      const dateCalculation = new Date(
+        dateConv.getFullYear(),
+        dateConv.getMonth() + nextWeek,
+        dateConv.getDate(),
+      );
+      const dateConvStr = getMonday(dateCalculation, 1)
+        .toISOString()
+        .substring(0, 10);
+      state.selectedDateInWeek = dateConvStr;
+    },
+
   },
 });
 

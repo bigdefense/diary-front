@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setEditor } from '@/Redux/action';
-import useGetEditor from '@/pages/Utils/useGetEditor';
+import { setEditor } from '../../../Redux/action';
+import useGetEditor from '../../Utils/useGetEditor';
 import TiptapPresenter from './TiptapPresenter';
 
 /**
@@ -21,7 +21,6 @@ const TiptapContainer = () => {
     (state) => state.dailyReducer.dailyContents[`D-${currentDate}`],
   );
   const dispatch = useDispatch();
-
   const editor = useGetEditor();
   // 날짜가 바뀌면 editor content에 날짜에 맞는 content 불러오기
   useEffect(() => {

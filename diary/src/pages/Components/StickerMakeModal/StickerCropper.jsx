@@ -1,9 +1,9 @@
-import { useState, useRef } from "react";
-import Cropper from "react-cropper";
-import "cropperjs/dist/cropper.css";
-import { useDispatch } from "react-redux";
-import { addTableSticker } from "@/Redux/action";
-import { BiDuplicate, BiX } from "react-icons/bi";
+import { useState, useRef } from 'react';
+import Cropper from 'react-cropper';
+import 'cropperjs/dist/cropper.css';
+import { useDispatch } from 'react-redux';
+import { BiDuplicate, BiX } from 'react-icons/bi';
+import { addTableSticker } from '@/Redux/action';
 
 function StickerCropper({ modalHandler }) {
   const dispatch = useDispatch();

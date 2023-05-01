@@ -18,6 +18,7 @@ const useGetEditor = () => {
     parseOptions: {
       preserveWhitespace: true,
     },
+    enablePasteRules: [Color, 'horizontalRule'],
   });
   return editor;
 };

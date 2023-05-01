@@ -1,7 +1,8 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { BiX } from 'react-icons/bi';
 import PropTypes from 'prop-types';
-import { INPUT_PLACEHOLDER } from '@/Constants/monthlyConstants';
+import { INPUT_PLACEHOLDER } from '../../../../../Constants/monthlyConstants';
 
 const MonthInputModalPresenter = ({
   dayInfo,
@@ -40,16 +41,27 @@ const MonthInputModalPresenter = ({
     </div>
   </div>
 ) : null);
-
 MonthInputModalPresenter.propTypes = {
-  dayInfo: PropTypes.object,
+  dayInfo: PropTypes.shape({
+    date: PropTypes.number.isRequired,
+    dateName: PropTypes.string.isRequired,
+    day: PropTypes.string.isRequired,
+    isHoliday: PropTypes.bool.isRequired,
+    isInMonth: PropTypes.bool.isRequired,
+    locdate: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
+    todos: PropTypes.arrayOf(PropTypes.shape({
+      date: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      todoContent: PropTypes.string.isRequired,
+    })).isRequired,
+  }).isRequired,
   inputModalVisible: PropTypes.bool.isRequired,
-  inputModalRef: PropTypes.object,
-  handleInputModalClose: PropTypes.func,
-  onChildDbclick: PropTypes.func,
-  inputText: PropTypes.string,
-  focusRef: PropTypes.object,
-  handleChange: PropTypes.func,
-  handleKeyPress: PropTypes.func,
+  inputModalRef: PropTypes.shape({ current: PropTypes.object }).isRequired,
+  handleInputModalClose: PropTypes.func.isRequired,
+  onChildDbclick: PropTypes.func.isRequired,
+  inputText: PropTypes.string.isRequired,
+  focusRef: PropTypes.shape({ current: PropTypes.object }).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleKeyPress: PropTypes.func.isRequired,
 };
 export default MonthInputModalPresenter;
