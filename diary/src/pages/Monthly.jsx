@@ -25,7 +25,7 @@ import { CURRENT_ROUTER_PATH } from '../Constants/constants';
  * @returns
  */
 
-function MonthlyPage() {
+const MonthlyPage = () => {
   const { yearInMonth, selectedMonth } = useSelector(
     (state) => state.monthSelectorReducer,
   );
@@ -35,7 +35,6 @@ function MonthlyPage() {
   const currRouter = CURRENT_ROUTER_PATH();
   const dispatch = useDispatch();
   const { monthCalendar } = useSelector((state) => state.monthCalendarReducer);
-
   // month, year 바뀔 때 마다 calendar를 새로 불러오게 함
   const controlCalendar = useMonthCalendar(yearInMonth, MONTH_LIST[selectedMonth]);
   useEffect(() => {
@@ -108,6 +107,6 @@ function MonthlyPage() {
       <SideBarContainer />
     </>
   );
-}
+};
 
 export default MonthlyPage;

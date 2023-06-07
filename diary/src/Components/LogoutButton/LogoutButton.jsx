@@ -1,37 +1,23 @@
 import React from 'react';
-import axios from 'src/Utils/api';
-import { removeCookie } from 'src/Utils/cookies';
+// import { removeCookie } from 'src/Utils/cookies';
+import useAxios from 'src/hooks/useAxios';
 
 const LogoutButton = () => {
-  const send = async () => {
-    try {
-      await axios
-        .post(
-          '/users/signout/',
-          {
-            email: 'dmswl@dmswl.com',
-            password: 'dmswl1',
-            name: 'dmswl',
-            image: '',
-            image_type: '',
-          },
-          {
-            withCredentials: true,
-          },
-        )
-        .then((res) => {
-          console.log(res);
-          removeCookie('Authorization');
-          removeCookie('Refresh');
-        })
-        .catch((err) => console.log(err));
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const handleLogout = useAxios({
+    method: 'post',
+    url: '/users/signout',
+    payload: {
+      email: 'mmmm@m.com',
+      password: 'mmmm',
+      name: '이이이',
+      image: '',
+      image_type: '',
+    },
+  });
+
   return (
     <button
-      onClick={send}
+      onClick={handleLogout}
       type="button"
       className="m-5 p-5 bg-blue-50"
     >

@@ -6,10 +6,9 @@ const SignupPresent = ({
   passwordRegister,
   passwordCheckRegister,
   nameRegister,
-  handleSubmit,
   isDirty,
   isSubmitting,
-  onSubmit,
+  handleSignup,
   errors,
 }) => (
   <div className="flex justify-center items-center h-screen bg-orange-100">
@@ -23,7 +22,7 @@ const SignupPresent = ({
       </div>
       <form
         className="flex flex-col mx-5 w-3/4"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSignup}
       >
         <input
           id="email"
@@ -99,11 +98,10 @@ SignupPresent.propTypes = {
   nameRegister: PropTypes.shape({
     name: PropTypes.string, onChange: PropTypes.func, onBlur: PropTypes.func, ref: PropTypes.func,
   }).isRequired,
-  handleSubmit: PropTypes.func.isRequired,
   isDirty: PropTypes.bool.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  errors: PropTypes.objectOf(PropTypes.objectOf()).isRequired,
+  handleSignup: PropTypes.func.isRequired,
+  errors: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
 };
 
 export default SignupPresent;

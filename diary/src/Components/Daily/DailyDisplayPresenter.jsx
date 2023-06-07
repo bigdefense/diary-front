@@ -4,7 +4,9 @@ import { v4 } from 'uuid';
 import { TITLE } from '../../Constants/dailyConstant';
 import TiptapContainer from '../Tiptap/TiptapContainer';
 
-function DailyDisplayPresenter({ Daily, content, handleInput }) {
+function DailyDisplayPresenter({
+  Daily, content, handleInput, setIsSave,
+}) {
   const roundLine = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
   return (
     <div className="mx-10 my-5 p-2 border-4 border-gray-100 shadow-sm">
@@ -35,7 +37,7 @@ function DailyDisplayPresenter({ Daily, content, handleInput }) {
         />
       </div>
       <div className="border-2 border-gray-200 overflow-hidden">
-        <TiptapContainer />
+        <TiptapContainer setIsSave={setIsSave} />
       </div>
     </div>
   );
@@ -49,6 +51,7 @@ DailyDisplayPresenter.propTypes = {
   }),
   content: PropTypes.string.isRequired,
   handleInput: PropTypes.func.isRequired,
+  setIsSave: PropTypes.func.isRequired,
 };
 DailyDisplayPresenter.defaultProps = {
   Daily: PropTypes.shape({
